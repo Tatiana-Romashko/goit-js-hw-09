@@ -43,7 +43,7 @@ const options = {
   minuteIncrement: 1,
   onClose(selectedDates) {
     console.log(selectedDates[0]);
-    timerDeadline = selectedDates[0].getTime();
+    const timerDeadline = selectedDates[0].getTime();
     const delta = timerDeadline - Date.now();
     if (delta <= 0) {
       Notiflix.Notify.failure('Please choose a date in the future');
