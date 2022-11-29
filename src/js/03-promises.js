@@ -23,23 +23,23 @@ form.addEventListener('submit', startPromise);
 
 function startPromise(evt) {
   evt.preventDefault();
+
   let { delay } = evt.target.elements;
   const { step } = evt.target.elements;
   const { amount } = evt.target.elements;
   let dataObj = {
-    delay: delay.value,
-    step: step.value,
-    amount: amount.value,
+    delay: +delay.value,
+    step: +step.value,
+    amount: +amount.value,
   };
   console.log(dataObj);
   let position = 0;
-
   for (let i = 1; i <= dataObj.amount; i += 1) {
     position = i;
 
     const initialDelay = dataObj.delay;
     let newDelay = (dataObj.delay += dataObj.step);
-
+    console.log('the delay is', newDelay);
     createPromise(position, initialDelay, newDelay)
       .then(({ position, newDelay }) => {
         setTimeout(() => {
@@ -58,13 +58,13 @@ function startPromise(evt) {
   }
 }
 
-function createPromise(position, delay) {
+function createPromise(position, newDelay) {
   const shouldResolve = Math.random() > 0.3;
   return new Promise((resolve, reject) => {
     if (shouldResolve) {
-      return resolve({ position, delay });
+      return resolve({ position, newDelay });
     } else {
-      return reject({ position, delay });
+      return reject({ position, newDelay });
     }
   });
 }

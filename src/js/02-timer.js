@@ -60,6 +60,7 @@ let intervalId = null;
 
 refs.startBtn.addEventListener('click', countDown);
 function countDown() {
+  clearInterval(intervalId);
   const startTime = calendar.selectedDates[0].getTime();
 
   intervalId = setInterval(() => {
